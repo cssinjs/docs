@@ -1,0 +1,10 @@
+{
+  "name": "jss-docs",
+  "version": "1.0.0",
+  "description": "New docs for the jss project",
+  "main": "index.js",
+  "repository": "https://github.com/cssinjs/docs.git",
+  "author": "Henri Beck <henribeck.dev@gmail.com>",
+  "license": "MIT",
+  "private": true
+}
