@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import Layout from './src/layout';
 import theme from './src/theme';
 import { ThemeProvider } from 'react-jss';
 
 import 'modern-normalize/modern-normalize.css';
+
+interface Page {
+  element: ReactElement<any>,
+}
 
 export function onInitialClientRender() {
   const style = window.document.getElementById("server-side-jss");
@@ -15,7 +19,7 @@ export function onInitialClientRender() {
   }
 }
 
-export function wrapPageElement({ element }) {
+export function wrapPageElement({ element }: Page) {
   return (
     <Layout>
       {element}
@@ -23,7 +27,7 @@ export function wrapPageElement({ element }) {
   );
 }
 
-export function wrapRootElement({ element }) {
+export function wrapRootElement({ element }: Page) {
   return (
     <ThemeProvider theme={theme}>
       {element}

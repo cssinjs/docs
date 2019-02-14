@@ -9,7 +9,7 @@ export interface OwnProps {
 
 interface Props extends OwnProps, WithStyles<typeof styles> {}
 
-const Hamburger = ({active, classes}: Props) => (
+const Hamburger = ({classes}: Props) => (
   <div className={classes.hamburger}>
     <span className={classes.barFirst} />
     <span className={classes.barSecond} />

@@ -7,10 +7,8 @@ export default (theme: Theme) => ({
     display: 'block',
     textDecoration: 'none',
     opacity: (props: OwnProps) => props.level === 0 ? 1 : 0.8,
-    font: {
-      weight: 400,
-      size: (props: OwnProps) => props.level === 0 ? 16 : 14,
-    },
+    fontWeight: 400,
+    fontSize: (props: OwnProps) => props.level === 0 ? 16 : 14,
     padding: (props: OwnProps) => props.level === 0 ? '5px 0' : 0,
     '&:hover': {
       cursor: 'pointer',

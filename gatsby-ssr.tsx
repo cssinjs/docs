@@ -4,11 +4,17 @@ import {
   createGenerateId, ThemeProvider,
 } from 'react-jss';
 import { renderToString } from "react-dom/server";
-import React from "react";
+import React, { ReactElement } from 'react';
 import Layout from './src/layout';
 import theme from './src/theme';
 
-export function replaceRenderer({ bodyComponent, replaceBodyHTMLString, setHeadComponents }) {
+interface Renderer {
+  bodyComponent: ReactElement<any>,
+  replaceBodyHTMLString: (content: string) => void,
+  setHeadComponents: (comps: ReactElement<any>[]) => void,
+}
+
+export function replaceRenderer({ bodyComponent, replaceBodyHTMLString, setHeadComponents }: Renderer) {
   const registry = new SheetsRegistry();
 
   replaceBodyHTMLString(
@@ -22,8 +28,6 @@ export function replaceRenderer({ bodyComponent, replaceBodyHTMLString, setHeadC
     )
   );
 
-  console.log(registry.toString());
-
   setHeadComponents([
     <style
       type="text/css"
@@ -34,7 +38,11 @@ export function replaceRenderer({ bodyComponent, replaceBodyHTMLString, setHeadC
   ]);
 }
 
-export function wrapPageElement({ element }) {
+interface Page {
+  element: ReactElement<any>,
+}
+
+export function wrapPageElement({ element }: Page) {
   return (
     <Layout>
       {element}
@@ -42,7 +50,7 @@ export function wrapPageElement({ element }) {
   );
 }
 
-export function wrapRootElement({ element }) {
+export function wrapRootElement({ element }: Page) {
   return (
     <ThemeProvider theme={theme}>
       {element}

@@ -2,7 +2,15 @@ import path from 'path';
 
 import pages from './src/pages';
 
-export function createPages({ actions }) {
+interface Actions {
+  createPage<Context extends object>(options: {
+    path: string,
+    component: string,
+    context: Context,
+  }): void;
+}
+
+export function createPages({ actions }: { actions: Actions }) {
   Object.keys(pages).forEach((page) => {
     actions.createPage({
       path: pages[page].path,
