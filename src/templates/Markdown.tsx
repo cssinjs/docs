@@ -1,6 +1,6 @@
 import React from 'react';
 import withStyles, { WithStyles } from 'react-jss';
-import { MarkdownPage } from '../pages';
+import { MarkdownPage } from '../gatsby/pages';
 
 const styles = {
   container: {

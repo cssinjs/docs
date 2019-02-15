@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import withStyles, { WithStyles } from 'react-jss';
-import {rotateZ, translateX} from 'css-functions';
+import { rotateZ, translateX } from 'css-functions';
 
 import { Theme } from '../../theme';
 
@@ -37,28 +37,29 @@ const styles = (theme: Theme) => ({
   },
   barFirst: {
     composes: '$bar',
-    top: (props: OwnProps) => props.active ? '50%' : 0,
-    marginTop: (props: OwnProps) => props.active ? -barWeight / 2 : null,
-    transform: (props: OwnProps) => props.active ? rotateZ(135) : null,
+    top: (props: OwnProps) => (props.active ? '50%' : 0),
+    marginTop: (props: OwnProps) => (props.active ? -barWeight / 2 : null),
+    transform: (props: OwnProps) => (props.active ? rotateZ(135) : null),
   },
   barSecond: {
     composes: '$bar',
     top: '50%',
     marginTop: -barWeight / 2,
-    opacity: (props: OwnProps) => props.active ? 0 : 1,
-    transform: (props: OwnProps) => props.active ? translateX(size * 2) : null,
+    opacity: (props: OwnProps) => (props.active ? 0 : 1),
+    transform: (props: OwnProps) =>
+      props.active ? translateX(size * 2) : null,
   },
   barThird: {
     composes: '$bar',
-    bottom: (props: OwnProps) => props.active ? '50%' : 0,
-    marginBottom: (props: OwnProps) => props.active ? -barWeight / 2 : 0,
-    transform: (props: OwnProps) => props.active ? rotateZ(-135) : null,
+    bottom: (props: OwnProps) => (props.active ? '50%' : 0),
+    marginBottom: (props: OwnProps) => (props.active ? -barWeight / 2 : 0),
+    transform: (props: OwnProps) => (props.active ? rotateZ(-135) : null),
   },
 });
 
 interface Props extends OwnProps, WithStyles<typeof styles> {}
 
-const Hamburger = ({classes}: Props) => (
+const Hamburger = ({ classes }: Props) => (
   <div className={classes.hamburger}>
     <span className={classes.barFirst} />
     <span className={classes.barSecond} />
@@ -66,4 +67,4 @@ const Hamburger = ({classes}: Props) => (
   </div>
 );
 
-export default withStyles(styles)(Hamburger)
+export default withStyles(styles)(Hamburger);

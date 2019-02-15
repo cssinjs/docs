@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import withStyles, { WithStyles } from 'react-jss';
 
 import { ExternalMenuItem, InternalMenuItem } from '../../menu';
@@ -7,23 +7,19 @@ import MenuLink from '../MenuLink';
 
 export interface OwnProps {
   level: number;
-  item: InternalMenuItem | ExternalMenuItem,
+  item: InternalMenuItem | ExternalMenuItem;
 }
 
 const styles = {
   menuItem: {
     listStyleType: 'none',
-    padding: (props: OwnProps) => props.level === 0 ? `10px 0 0 0` : 0,
+    padding: (props: OwnProps) => (props.level === 0 ? `10px 0 0 0` : 0),
   },
 };
 
 interface Props extends OwnProps, WithStyles<typeof styles> {}
 
-function MenuItem({
-  classes,
-  item,
-  level,
-}: Props) {
+function MenuItem({ classes, item, level }: Props) {
   return (
     <li className={classes.menuItem}>
       <MenuLink item={item} level={level} />
@@ -35,4 +31,4 @@ function MenuItem({
 
 MenuItem.defaultProps = { level: 0 };
 
-export default withStyles(styles)(MenuItem)
+export default withStyles(styles)(MenuItem);

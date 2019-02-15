@@ -6,8 +6,8 @@ import { Theme } from '../../theme';
 import { InternalMenuItem, ExternalMenuItem } from '../../menu';
 
 interface OwnProps {
-  item: InternalMenuItem | ExternalMenuItem,
-  level: number,
+  item: InternalMenuItem | ExternalMenuItem;
+  level: number;
 }
 
 const styles = (theme: Theme) => ({
@@ -15,22 +15,22 @@ const styles = (theme: Theme) => ({
     color: theme.textColorInverse,
     display: 'block',
     textDecoration: 'none',
-    opacity: (props: OwnProps) => props.level === 0 ? 1 : 0.8,
+    opacity: (props: OwnProps) => (props.level === 0 ? 1 : 0.8),
     fontWeight: 400,
-    fontSize: (props: OwnProps) => props.level === 0 ? 16 : 14,
-    padding: (props: OwnProps) => props.level === 0 ? '5px 0' : 0,
+    fontSize: (props: OwnProps) => (props.level === 0 ? 16 : 14),
+    padding: (props: OwnProps) => (props.level === 0 ? '5px 0' : 0),
     '&:hover': {
       cursor: 'pointer',
       color: theme.textColorInverseActive,
-      opacity: 1
-    }
+      opacity: 1,
+    },
   },
   active: {
     opacity: 1,
     color: theme.themeColor,
     '&:hover': {
       color: theme.themeColor,
-    }
+    },
   },
 });
 
@@ -52,10 +52,15 @@ function MenuLink({ classes, item }: Props) {
   switch (item.type) {
     case 'external': {
       return (
-        <a className={classes.menuItem} href={item.url} target="_blank" rel="noopener noreferrer">
+        <a
+          className={classes.menuItem}
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {item.title}
         </a>
-      )
+      );
     }
     case 'internal': {
       return (
@@ -66,8 +71,10 @@ function MenuLink({ classes, item }: Props) {
         >
           {item.title}
         </Link>
-      )
+      );
     }
+    default:
+      return null;
   }
 }
 

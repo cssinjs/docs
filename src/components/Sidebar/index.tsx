@@ -1,11 +1,20 @@
+import React, { useState, useCallback } from 'react';
+import withStyles, { WithStyles } from 'react-jss';
+import { Link } from 'gatsby';
 import { translateX } from 'css-functions';
 import { size, position } from 'polished';
 
+import Logo from '../../icons/Logo';
+import GithubWidget from '../../components/GithubWidget';
+import Hamburger from '../../components/Hamburger';
+import config from '../../config';
+import Menu from '../../components/Menu';
+import menu from '../../menu';
 import { Theme } from '../../theme';
 
 const sidebarWidth = 320;
 
-export default (theme: Theme) => ({
+const styles = (theme: Theme) => ({
   sidebar: {
     background: theme.sidebarBg,
     color: theme.sidebarColor,
@@ -26,19 +35,19 @@ export default (theme: Theme) => ({
 
   navbar: {
     display: 'flex',
-    flexDirection: 'column',
+    flexGrow: 1,
+    flexShrink: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
 
     [theme.media.sm]: {
       padding: [10, 20],
-      alignItems: 'center',
       justifyContent: 'space-between',
-      flexDirection: 'row',
     },
   },
 
   logoContainer: {
     textAlign: 'center',
-    flexShrink: 0,
     margin: 30,
 
     [theme.media.sm]: {
@@ -80,6 +89,7 @@ export default (theme: Theme) => ({
   menuContainer: {
     transition: theme.transition(),
     background: theme.sidebarBg,
+    paddingBottom: 80,
 
     [theme.media.sm]: {
       ...position('fixed', 70, 0, 0, 0),
@@ -95,3 +105,35 @@ export default (theme: Theme) => ({
     },
   },
 });
+
+
+interface Props extends WithStyles<typeof styles> {}
+
+function Sidebar({ classes }: Props) {
+  const [showMenu, setShowMenu] = useState(false);
+  const handleToggleMenu = useCallback(() => {
+    setShowMenu(show => !show);
+  }, []);
+
+  return (
+    <aside className={classes.sidebar}>
+      <nav className={classes.navbar}>
+        <Link to="/" className={classes.logoContainer}>
+          <Logo className={classes.logo} />
+        </Link>
+
+        <button className={classes.hamburger} onClick={handleToggleMenu}>
+          <Hamburger active={showMenu} />
+        </button>
+      </nav>
+
+      <div className={`${classes.menuContainer} ${showMenu && classes.active}`}>
+        <GithubWidget className={classes.github} repo={config.github.repo} />
+
+        <Menu menu={menu} level={0} />
+      </div>
+    </aside>
+  );
+}
+
+export default withStyles(styles)(Sidebar);

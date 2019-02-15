@@ -1,4 +1,4 @@
-import pages from './pages';
+import pages from './gatsby/pages';
 
 export interface CommonMenuItem {
   title: string;
@@ -7,17 +7,34 @@ export interface CommonMenuItem {
 
 export interface ExternalMenuItem extends CommonMenuItem {
   url: string;
-  type: 'external',
+  type: 'external';
 }
 
 export interface InternalMenuItem extends CommonMenuItem {
-  path: string | null;
-  type: 'internal',
+  path: keyof typeof pages | null;
+  type: 'internal';
 }
 
 type MenuItem = ExternalMenuItem | InternalMenuItem;
 
 export type Menu = MenuItem[];
+
+const plugins = [
+  'jss-plugin-rule-value-function',
+  'jss-plugin-rule-value-observable',
+  'jss-plugin-template',
+  'jss-plugin-cache',
+  'jss-plugin-global',
+  'jss-plugin-extend',
+  'jss-plugin-nested',
+  'jss-plugin-compose',
+  'jss-plugin-camel-case',
+  'jss-plugin-default-unit',
+  'jss-plugin-expand',
+  'jss-plugin-vendor-prefixer',
+  'jss-plugin-props-sort',
+  'jss-plugin-isolate',
+];
 
 const menu: Menu = [
   {
@@ -34,37 +51,37 @@ const menu: Menu = [
       {
         title: 'Features',
         type: 'internal',
-        path: pages.features.path,
+        path: '/features',
       },
       {
         title: 'Setup',
         type: 'internal',
-        path: pages.setup.path,
+        path: '/setup',
       },
       {
         title: 'CDN Links',
         type: 'internal',
-        path: pages.cdn.path,
+        path: '/cdn',
       },
       {
         title: 'Try it out',
         type: 'internal',
-        path: pages.repl.path,
+        path: '/repl',
       },
       {
         title: 'Who is using',
         type: 'internal',
-        path: pages.users.path,
+        path: '/users',
       },
       {
         title: 'Contributing',
         type: 'internal',
-        path: pages.contributing.path,
+        path: '/contributing',
       },
       {
         title: 'FAQ',
         type: 'internal',
-        path: pages.faq.path,
+        path: '/faq',
       },
     ],
   },
@@ -98,6 +115,92 @@ const menu: Menu = [
         title: 'Migrations',
         type: 'internal',
         path: '/migrations',
+      },
+    ],
+  },
+  {
+    title: 'API Reference',
+    path: null,
+    type: 'internal',
+
+    children: [
+      {
+        title: 'JSS Core API',
+        type: 'internal',
+        path: '/jss-api',
+      },
+      {
+        title: 'JSS Core Styles Syntax',
+        type: 'internal',
+        path: '/jss-syntax',
+      },
+      {
+        title: 'React-JSS',
+        type: 'internal',
+        path: '/react-jss',
+      },
+      {
+        title: 'Styled-JSS',
+        type: 'internal',
+        path: '/styled-jss',
+      },
+      {
+        title: 'Default Preset API',
+        type: 'internal',
+        path: '/jss-preset-default',
+      },
+      {
+        title: 'Plugins',
+        type: 'internal',
+        path: '/plugins',
+
+        children: plugins.map(
+          (plugin): InternalMenuItem => {
+            return {
+              type: 'internal',
+              path: `/${plugin}`,
+              title: plugin,
+            };
+          },
+        ),
+      },
+    ],
+  },
+  {
+    title: 'Examples',
+    type: 'internal',
+    path: '/examples',
+
+    children: [
+      {
+        title: 'React TodoMVC',
+        path: '/examples/react-todo-mvc',
+        type: 'internal',
+      },
+      {
+        title: 'Calendar',
+        path: '/examples/calendar',
+        type: 'internal',
+      },
+      {
+        title: 'Perdido Grid System',
+        path: '/examples/perdido-example',
+        type: 'internal',
+      },
+      {
+        title: 'Function values',
+        path: '/examples/function-values',
+        type: 'internal',
+      },
+      {
+        title: 'Observable values',
+        path: '/examples/observables',
+        type: 'internal',
+      },
+      {
+        title: 'Swinging cat',
+        path: '/examples/swinging-cat-rx',
+        type: 'internal',
       },
     ],
   },

@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import Sidebar from './Sidebar';
-import { Theme } from '../theme';
+import Sidebar from '../Sidebar';
+import { Theme } from '../../theme';
 import withStyles, { WithStyles } from 'react-jss';
 
 const styles = (theme: Theme) => ({
@@ -16,6 +16,10 @@ const styles = (theme: Theme) => ({
 
     [theme.media.sm]: { flexDirection: 'column' },
   },
+
+  content: {
+    flex: 1,
+  },
 });
 
 interface Props extends WithStyles<typeof styles> {
@@ -27,7 +31,9 @@ function Layout({ children, classes }: Props) {
     <div className={classes.app}>
       <Sidebar />
 
-      {children}
+      <main className={classes.content}>
+        {children}
+      </main>
     </div>
   );
 }

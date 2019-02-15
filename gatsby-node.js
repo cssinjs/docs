@@ -1,2 +1,6 @@
 require('ts-node/register/transpile-only');
-exports.createPages = require('./gatsby-node.ts').createPages;
+const node = require('./src/gatsby/node');
+
+Object.keys(node).forEach((key) => {
+  exports[key] = node[key];
+});
