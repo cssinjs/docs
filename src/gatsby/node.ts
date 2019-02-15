@@ -19,16 +19,31 @@ const getComponentForPage = (page: MarkdownPage | IFramePage) => {
   }
 };
 
-export const createPages = ({ actions }: { actions: Actions }) => {
+export const createPages = async ({ actions }: { actions: Actions }) => {
   const paths = Object.keys(pages) as Array<keyof typeof pages>;
 
-  paths.forEach(path => {
-    const page: Page = pages[path] as any;
+  await Promise.all(
+    paths.map(async path => {
+      const page: Page = pages[path] as any;
 
-    actions.createPage({
-      path: path,
-      component: getComponentForPage(page),
-      context: { page },
-    });
-  });
+      switch (page.template) {
+        case 'iframe': {
+          actions.createPage({
+            path: path,
+            component: getComponentForPage(page),
+            context: { page },
+          });
+          break;
+        }
+        case 'markdown': {
+          // TODO: Fetch markdown here
+          actions.createPage({
+            path: path,
+            component: getComponentForPage(page),
+            context: { page },
+          });
+        }
+      }
+    }),
+  );
 };
