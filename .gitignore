@@ -63,3 +63,6 @@ typings/
 # Gatsby folders
 .cache
 public
+
+# Jetbrains
+.idea
