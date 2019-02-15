@@ -1,4 +1,5 @@
 import { translateX } from 'css-functions';
+import { size, position } from 'polished';
 
 import { Theme } from '../../theme';
 
@@ -47,14 +48,10 @@ export default (theme: Theme) => ({
   },
 
   logo: {
-    height: 100,
-    width: 100,
+    ...size(100),
     cursor: 'pointer',
 
-    [theme.media.sm]: {
-      width: 50,
-      height: 50,
-    },
+    [theme.media.sm]: { ...size(50) },
   },
 
   github: {
@@ -85,13 +82,9 @@ export default (theme: Theme) => ({
     background: theme.sidebarBg,
 
     [theme.media.sm]: {
-      position: 'fixed',
+      ...position('fixed', 70, 0, 0, 0),
       overflowY: 'auto',
       overflowX: 'hidden',
-      top: 70,
-      left: 0,
-      right: 0,
-      bottom: 0,
       transform: translateX('100%'),
     },
   },

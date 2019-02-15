@@ -1,25 +1,14 @@
-import {
-  JssProvider,
-  SheetsRegistry,
-  createGenerateId,
-  ThemeProvider,
-} from 'react-jss';
+import React from 'react';
 import { renderToString } from 'react-dom/server';
-import React, { ReactElement } from 'react';
-import Layout from './src/layout';
-import theme from './src/theme';
+import { createGenerateId, JssProvider, ThemeProvider, SheetsRegistry } from 'react-jss';
+import theme from './src/theme.ts';
+import Layout from './src/layout/index.tsx';
 
-interface Renderer {
-  bodyComponent: ReactElement<any>;
-  replaceBodyHTMLString: (content: string) => void;
-  setHeadComponents: (comps: ReactElement<any>[]) => void;
-}
-
-export function replaceRenderer({
+export const replaceRenderer = ({
   bodyComponent,
   replaceBodyHTMLString,
   setHeadComponents,
-}: Renderer) {
+}) => {
   const registry = new SheetsRegistry();
 
   replaceBodyHTMLString(
@@ -38,16 +27,12 @@ export function replaceRenderer({
       dangerouslySetInnerHTML={{ __html: registry.toString() }}
     />,
   ]);
-}
+};
 
-interface Page {
-  element: ReactElement<any>;
-}
-
-export function wrapPageElement({ element }: Page) {
+export const wrapPageElement = ({ element }) => {
   return <Layout>{element}</Layout>;
-}
+};
 
-export function wrapRootElement({ element }: Page) {
+export const wrapRootElement = ({ element }) => {
   return <ThemeProvider theme={theme}>{element}</ThemeProvider>;
-}
+};

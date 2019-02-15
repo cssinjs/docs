@@ -1,13 +1,13 @@
 import React from 'react'
 import withStyles, { WithStyles } from 'react-jss';
 
-import { MenuItem as Item } from '../../menu';
+import { ExternalMenuItem, InternalMenuItem } from '../../menu';
 import Menu from '../Menu';
 import MenuLink from '../MenuLink';
 
 export interface OwnProps {
   level: number;
-  item: Item,
+  item: InternalMenuItem | ExternalMenuItem,
 }
 
 const styles = {

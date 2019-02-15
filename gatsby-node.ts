@@ -23,7 +23,7 @@ export function createPages({ actions }: { actions: Actions }) {
   const pageKeys = Object.keys(pages) as Array<keyof typeof pages>;
 
   pageKeys.forEach(pageKey => {
-    const page: Page = pages[pageKey];
+    const page: Page = pages[pageKey] as any;
 
     actions.createPage({
       path: page.path,

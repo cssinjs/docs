@@ -3,10 +3,10 @@ import { Link } from 'gatsby';
 import withStyles, { WithStyles } from 'react-jss';
 
 import { Theme } from '../../theme';
-import { MenuItem } from '../../menu';
+import { InternalMenuItem, ExternalMenuItem } from '../../menu';
 
 interface OwnProps {
-  item: MenuItem,
+  item: InternalMenuItem | ExternalMenuItem,
   level: number,
 }
 
@@ -36,10 +36,10 @@ const styles = (theme: Theme) => ({
 
 interface Props extends OwnProps, WithStyles<typeof styles> {}
 
-function getPathForItem(item: MenuItem): string {
+function getPathForItem(item: InternalMenuItem): string {
   if (item.path === null) {
     if (item.children && item.children[0]) {
-      return getPathForItem(item.children[0]);
+      return getPathForItem(item.children[0] as any);
     }
 
     return '';
@@ -49,23 +49,26 @@ function getPathForItem(item: MenuItem): string {
 }
 
 function MenuLink({ classes, item }: Props) {
-  if (item.url) {
-    return (
-      <a className={classes.menuItem} href={item.url} target="_blank" rel="noopener noreferrer">
-        {item.title}
-      </a>
-    )
+  switch (item.type) {
+    case 'external': {
+      return (
+        <a className={classes.menuItem} href={item.url} target="_blank" rel="noopener noreferrer">
+          {item.title}
+        </a>
+      )
+    }
+    case 'internal': {
+      return (
+        <Link
+          className={classes.menuItem}
+          activeClassName={item.path === null ? undefined : classes.active}
+          to={getPathForItem(item)}
+        >
+          {item.title}
+        </Link>
+      )
+    }
   }
-
-  return (
-    <Link
-      className={classes.menuItem}
-      activeClassName={item.path === null ? undefined : classes.active}
-      to={getPathForItem(item)}
-    >
-      {item.title}
-    </Link>
-  )
 }
 
 export default withStyles(styles)(MenuLink);
