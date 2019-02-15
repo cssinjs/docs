@@ -21,6 +21,9 @@ function useGithubStars(repo: string) {
         .then(data => {
           setStars(data.stargazers_count);
           cache.set(repo, data.stargazers_count);
+        })
+        .catch(err => {
+          console.warn(`Couldn't fetch github starts`, err);
         });
     }
   }, [repo]);

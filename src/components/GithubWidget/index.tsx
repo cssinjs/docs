@@ -53,10 +53,13 @@ function GithubWidget({ classes, repo, className }: Props) {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <span className={classes.item}>
-        <StarIcon className={classes.iconStar} />
-        {stars > 0 && <span>{formatStars(stars)}</span>}
-      </span>
+      {stars > 0 && (
+        <span className={classes.item}>
+          <StarIcon className={classes.iconStar} />
+          <span>{formatStars(stars)}</span>
+        </span>
+      )}
+
       <span className={classes.item}>
         <GithubIcon className={classes.iconGithub} />
         <span>GitHub</span>
