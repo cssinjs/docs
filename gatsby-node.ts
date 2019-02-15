@@ -28,7 +28,7 @@ export function createPages({ actions }: { actions: Actions }) {
     actions.createPage({
       path: page.path,
       component: getComponent(page),
-      context: page,
+      context: { page },
     });
   });
 }

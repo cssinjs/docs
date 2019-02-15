@@ -9,11 +9,11 @@ const styles = {
 };
 
 interface Props extends WithStyles<typeof styles> {
-  pageContext: MarkdownPage;
+  pageContext: { page: MarkdownPage };
 }
 
 const Template = ({ classes, pageContext }: Props) => {
-  return <div className={classes.container}>{pageContext.file}</div>;
+  return <div className={classes.container}>{pageContext.page.file}</div>;
 };
 
 export default withStyles(styles)(Template);

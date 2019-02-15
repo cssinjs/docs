@@ -4,7 +4,7 @@ import IFrame from '../components/IFrame';
 import { IFramePage } from '../pages';
 
 interface Props {
-  pageContext: IFramePage;
+  pageContext: { page: IFramePage };
 }
 
-export default ({ pageContext }: Props) => <IFrame src={pageContext.url} />;
+export default ({ pageContext }: Props) => <IFrame src={pageContext.page.url} />;

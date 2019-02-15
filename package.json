@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "develop": "gatsby develop --open",
-    "build": "gatsby develop",
+    "build": "gatsby build",
     "format": "prettier --write \"*.{ts,tsx}\" \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
