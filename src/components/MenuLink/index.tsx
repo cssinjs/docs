@@ -1,13 +1,38 @@
 import React from 'react';
-import { MenuItem } from '../../menu';
 import { Link } from 'gatsby';
 import withStyles, { WithStyles } from 'react-jss';
-import styles from './styles';
 
-export interface OwnProps {
+import { Theme } from '../../theme';
+import { MenuItem } from '../../menu';
+
+interface OwnProps {
   item: MenuItem,
   level: number,
 }
+
+const styles = (theme: Theme) => ({
+  menuItem: {
+    color: theme.textColorInverse,
+    display: 'block',
+    textDecoration: 'none',
+    opacity: (props: OwnProps) => props.level === 0 ? 1 : 0.8,
+    fontWeight: 400,
+    fontSize: (props: OwnProps) => props.level === 0 ? 16 : 14,
+    padding: (props: OwnProps) => props.level === 0 ? '5px 0' : 0,
+    '&:hover': {
+      cursor: 'pointer',
+      color: theme.textColorInverseActive,
+      opacity: 1
+    }
+  },
+  active: {
+    opacity: 1,
+    color: theme.themeColor,
+    '&:hover': {
+      color: theme.themeColor,
+    }
+  },
+});
 
 interface Props extends OwnProps, WithStyles<typeof styles> {}
 

@@ -1,4 +1,4 @@
-import {translateX} from 'css-functions'
+import { translateX } from 'css-functions';
 
 import { Theme } from '../../theme';
 
@@ -20,7 +20,7 @@ export default (theme: Theme) => ({
       height: 70,
       overflow: 'visible',
       width: '100vw',
-    }
+    },
   },
 
   navbar: {
@@ -53,7 +53,7 @@ export default (theme: Theme) => ({
 
     [theme.media.sm]: {
       width: 50,
-      height: 50
+      height: 50,
     },
   },
 
@@ -92,13 +92,13 @@ export default (theme: Theme) => ({
       left: 0,
       right: 0,
       bottom: 0,
-      transform: translateX('100%')
+      transform: translateX('100%'),
     },
   },
 
   active: {
     [theme.media.sm]: {
-      transform: translateX(0)
+      transform: translateX(0),
     },
   },
 });

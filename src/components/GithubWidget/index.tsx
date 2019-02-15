@@ -1,37 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import withStyles, { WithStyles } from 'react-jss';
 
 import GithubIcon from '../../icons/Github';
 import StarIcon from '../../icons/Star'
-import styles from './styles'
 import config from '../../config';
+import { Theme } from '../../theme';
+import useGithubStars from './use-github-stars';
 
 const formatStars = (num: number) => String(num).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+const styles = (theme: Theme) => ({
+  githubWidget: {
+    color: theme.textColorInverse,
+    display: 'flex',
+    alignItems: 'center',
+    textDecoration: 'none',
+    fontWeight: 400,
+    '&:hover': { opacity: 0.8 }
+  },
+  item: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    cursor: 'pointer',
+    padding: [15, 0],
+    color: theme.textColorInverseActive,
+  },
+  iconStar: {
+    marginRight: 8,
+    fill: theme.themeColor,
+  },
+  iconGithub: {
+    marginRight: 8,
+    fill: theme.textColorInverse,
+  }
+});
 
 interface Props extends WithStyles<typeof styles> {
   repo: string,
   className: string,
 }
 
-const cache = new Map<string, number>();
-
 function GithubWidget({ classes, repo, className }: Props) {
-  const [stars, setStars] = useState(cache.get(repo) || 0);
-
-  useEffect(() => {
-    const cachedStars = cache.get(repo);
-
-    if (cachedStars) {
-      setStars(cachedStars);
-    } else {
-      fetch(`${config.github.api}/repos/${repo}?access_token=${config.github.token}`)
-        .then(res => res.json())
-        .then(data => {
-          setStars(data.stargazers_count);
-          cache.set(repo, data.stargazers_count);
-        })
-    }
-  }, [repo]);
+  const stars = useGithubStars(repo);
 
   return (
     <a
@@ -42,13 +54,15 @@ function GithubWidget({ classes, repo, className }: Props) {
     >
       <span className={classes.item}>
         <StarIcon className={classes.iconStar} />
-        <span className={classes.text}>
-          {formatStars(stars)}
-        </span>
+        {stars > 0 && (
+          <span>
+            {formatStars(stars)}
+          </span>
+        )}
       </span>
       <span className={classes.item}>
         <GithubIcon className={classes.iconGithub} />
-        <span className={classes.text}>
+        <span>
           GitHub
         </span>
       </span>

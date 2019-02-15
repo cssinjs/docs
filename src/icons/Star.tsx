@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-import Icon from './Icon'
+import Icon from './Icon';
 
 interface Props {
-  className: string,
+  className: string;
 }
 
-const Star = ({className}: Props) => (
+const Star = ({ className }: Props) => (
   <Icon>
-    {({classes}) => (
+    {({ classes }) => (
       <svg
         className={`${classes.icon} ${className}`}
         xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,7 @@ const Star = ({className}: Props) => (
 );
 
 Star.defaultProps = {
-  className: ''
+  className: '',
 };
 
-export default Star
+export default Star;

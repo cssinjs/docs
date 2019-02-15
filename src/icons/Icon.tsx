@@ -6,14 +6,14 @@ const styles = {
     display: 'inline-block',
     height: '1em',
     maxWidth: '100%',
-    userSelect: 'none'
-  }
+    userSelect: 'none',
+  },
 };
 
 interface Props extends WithStyles<typeof styles> {
-  children: (props: WithStyles<typeof styles>) => ReactElement<any>,
+  children: (props: WithStyles<typeof styles>) => ReactElement<any>;
 }
 
-const Icon = ({children, ...rest}: Props) => children(rest);
+const Icon = ({ children, ...rest }: Props) => children(rest);
 
 export default withStyles(styles)(Icon);

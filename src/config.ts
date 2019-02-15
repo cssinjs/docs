@@ -1,7 +1,5 @@
 export default {
-  site: {
-
-  },
+  site: {},
 
   repl: 'https://cssinjs.github.io/repl/',
 
@@ -11,4 +9,4 @@ export default {
     api: `https://api.github.com`,
     token: '84f9d02a430cb688a2fbe568a9c0ce0ef0de9745',
   },
-}
+};

@@ -6,11 +6,11 @@ import { ThemeProvider } from 'react-jss';
 import 'modern-normalize/modern-normalize.css';
 
 interface Page {
-  element: ReactElement<any>,
+  element: ReactElement<any>;
 }
 
 export function onInitialClientRender() {
-  const style = window.document.getElementById("server-side-jss");
+  const style = window.document.getElementById('server-side-jss');
 
   console.log(style);
 
@@ -20,17 +20,9 @@ export function onInitialClientRender() {
 }
 
 export function wrapPageElement({ element }: Page) {
-  return (
-    <Layout>
-      {element}
-    </Layout>
-  );
+  return <Layout>{element}</Layout>;
 }
 
 export function wrapRootElement({ element }: Page) {
-  return (
-    <ThemeProvider theme={theme}>
-      {element}
-    </ThemeProvider>
-  );
+  return <ThemeProvider theme={theme}>{element}</ThemeProvider>;
 }

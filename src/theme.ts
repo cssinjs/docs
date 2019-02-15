@@ -4,7 +4,8 @@ const base = {
 };
 
 const theme = {
-  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+  fontFamily:
+    '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
   fontSize: 16,
   lineHeight: 1.5,
 
@@ -24,7 +25,8 @@ const theme = {
   sidebarBgDark: '#1b1f23',
   sidebarColor: base.light,
 
-  codeFontFamily: '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace',
+  codeFontFamily:
+    '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace',
   codeBackground: '#f6f8fa',
 
   // Size variables
@@ -42,8 +44,8 @@ const theme = {
     lg: '@media (max-width: 1200px)',
     md: '@media (max-width: 992px)',
     sm: '@media (max-width: 768px)',
-    xs: '@media (max-width: 480px)'
-  }
+    xs: '@media (max-width: 480px)',
+  },
 };
 
 export type Theme = typeof theme;

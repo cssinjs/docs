@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Sidebar from './Sidebar';
 import { Theme } from '../theme';
 import withStyles, { WithStyles } from 'react-jss';
@@ -19,7 +19,7 @@ const styles = (theme: Theme) => ({
 });
 
 interface Props extends WithStyles<typeof styles> {
-  children: any,
+  children: ReactNode;
 }
 
 function Layout({ children, classes }: Props) {
